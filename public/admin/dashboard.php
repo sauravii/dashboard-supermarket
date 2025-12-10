@@ -72,9 +72,9 @@ $users = read_users_controller();
 
       <!-- MAIN CONTENT -->
        <div class="main-content">
-             <div id="dashboard-content" class="menu-content hide">
-               <h1>Dashboard</h1>
-               <p>Ini halaman dashboard</p>
+             <div id="dashboard-content" class="menu-content">
+               <h1 class="main-title">Dashboard</h1>
+               <a href="../logout.php">Dummy Logout</a>
             </div>
 
             <div id="staff-content" class="menu-content ">
@@ -107,16 +107,16 @@ $users = read_users_controller();
                   </tbody>
                </table>
 
-               <button class="btn btn-add-user">
-                  Tambah Pengguna
-               </button>
-
-               <a href="../logout.php">Dummy Logout</a>
+               <a href="./add_user.php">
+                  <button class="btn btn-add-user">
+                     Tambah Pengguna
+                  </button>
+               </a>
             </div>
 
-            <div id="role-content" class="menu-content hide">
-               <h1>Role Management</h1>
-               <p>Ini halaman role</p>
+            <div id="role-content" class="menu-content">
+               <h1 class="main-title">Role Management</h1>
+               
             </div>
 
             <div id="activity-content" class="menu-content hide">

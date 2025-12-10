@@ -290,6 +290,9 @@ nav .profile .text-logout {
 .main-content .active {
   display: block;
 }
+.menu-content {
+  margin-bottom: 40px;
+}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -334,7 +337,7 @@ table .btn-danger {
   font-weight: 500;
   cursor: pointer;
   display: block;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 }
 .btn:hover {
   opacity: 80%;
