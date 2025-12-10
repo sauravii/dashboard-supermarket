@@ -12,8 +12,11 @@ if ($_SESSION['role_id'] != 1) {
 }
 
 require_once('../../controllers/admin/user_controller.php');
+require_once('../../controllers/admin/role_controller.php');
 
 $users = read_users_controller();
+$roles = read_roles_controller();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -116,7 +119,35 @@ $users = read_users_controller();
 
             <div id="role-content" class="menu-content">
                <h1 class="main-title">Role Management</h1>
-               
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Role ID</th>
+                        <th>Role Name</th>
+                        <th>Dibuat Pada</th>
+                        <th>Aksi</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <?php foreach ($roles as $role): ?>
+                        <tr>
+                           <td><?= $role['role_id'] ?></td>
+                           <td><?= $role['role_name'] ?></td>
+                           <td><?= $role['created_at'] ?></td>
+                           <td>
+                              <a href="edit_role.php?id=<?= $user['user_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                              <!-- <a href="delete_role.php?id=<?= $user['user_id'] ?>" class="btn btn-danger btn-sm">Hapus</a> -->
+                           </td>
+                        </tr>
+                     <?php endforeach; ?>
+                  </tbody>
+               </table>
+
+               <a href="./add_role.php">
+                  <button class="btn btn-add-user">
+                     Tambah Role
+                  </button>
+               </a>
             </div>
 
             <div id="activity-content" class="menu-content hide">
