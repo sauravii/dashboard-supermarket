@@ -6,12 +6,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit;
 }
 
-if ($_SESSION['role'] !== 'staff') {
-    header("Location: Location: /supermarket-app/public/admin/dashboard.php");
+if ($_SESSION['role_id'] != 2) { 
+    header("Location: /supermarket-app/public/admin/dashboard.php");
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
