@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "../config/db.php";
+require "../controllers/admin/activity_log_controller.php";
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -17,6 +18,8 @@ if ($row = mysqli_fetch_assoc($result)) {
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['role_id'] = (int)$row['role_id'];
+
+        create_log_controller($row['user_id'], "Login", "User {$row['username']} berhasil login");
 
         if ($row['role_id'] == 1) {
             header("Location: /supermarket-app/public/admin/dashboard.php");

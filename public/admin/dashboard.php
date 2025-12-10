@@ -13,9 +13,11 @@ if ($_SESSION['role_id'] != 1) {
 
 require_once('../../controllers/admin/user_controller.php');
 require_once('../../controllers/admin/role_controller.php');
+require_once(__DIR__ . '/../../controllers/admin/activity_log_controller.php');
 
 $users = read_users_controller();
 $roles = read_roles_controller();
+$logs = read_logs_controller();
 
 ?>
 <!DOCTYPE html>
@@ -27,9 +29,6 @@ $roles = read_roles_controller();
 
     <!-- CSS -->
      <link rel="stylesheet" href="../../assets/css/admin_dashboard.css">
-
-   <!-- BOOTSTRAP -->
-   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- JS -->
    <script src="../../assets/js/admin_dashboard.js" async></script>
@@ -75,11 +74,13 @@ $roles = read_roles_controller();
 
       <!-- MAIN CONTENT -->
        <div class="main-content">
+            <!-- dashboard menu -->
              <div id="dashboard-content" class="menu-content">
                <h1 class="main-title">Dashboard</h1>
                <a href="../logout.php">Dummy Logout</a>
             </div>
 
+            <!-- staff management -->
             <div id="staff-content" class="menu-content ">
                <h1 class="main-title">Daftar Pengguna</h1>
                <table>
@@ -116,9 +117,10 @@ $roles = read_roles_controller();
                   </button>
                </a>
             </div>
-
+            
+            <!-- role management -->
             <div id="role-content" class="menu-content">
-               <h1 class="main-title">Role Management</h1>
+               <h1 class="main-title">Daftar Role</h1>
                <table>
                   <thead>
                      <tr>
@@ -149,10 +151,38 @@ $roles = read_roles_controller();
                   </button>
                </a>
             </div>
-
-            <div id="activity-content" class="menu-content hide">
-               <h1>Activity Log</h1>
-               <p>Ini halaman activity log</p>
+            
+            <!-- activity log -->
+            <div id="role-content" class="menu-content">
+               <h1 class="main-title">Daftar Aktivitas</h1>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Log ID</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Aksi</th>
+                        <th>Deskripsi</th>
+                        <th>IP Address</th>
+                        <th>Device</th>
+                        <th>Waktu</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <?php foreach ($logs as $log): ?>
+                     <tr>
+                        <td><?= $log['log_id'] ?></td>
+                        <td><?= $log['username'] ?></td>
+                        <td><?= $log['role_name'] ?></td>
+                        <td><?= $log['action'] ?></td>
+                        <td><?= $log['description'] ?></td>
+                        <td><?= $log['ip_address'] ?></td>
+                        <td><?= $log['device_info'] ?></td>
+                        <td><?= $log['created_at'] ?></td>
+                     </tr>
+                     <?php endforeach; ?>
+                  </tbody>
+               </table>
             </div>
        </div>
       <!-- MAIN CONTENT -->
