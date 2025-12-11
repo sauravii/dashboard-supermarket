@@ -15,11 +15,13 @@ require_once('../../controllers/admin/user_controller.php');
 require_once('../../controllers/admin/role_controller.php');
 require_once('../../controllers/staff/product_controller.php');
 require_once('../../controllers/staff/category_controller.php');
+require_once('../../controllers/staff/brand_controller.php');
 
 $users = read_users_controller();
 $roles = read_roles_controller();
 $products = read_product_controller();
 $categories = read_categories_controller();
+$brands = read_brand_controller();
 
 ?>
 <!DOCTYPE html>
@@ -159,6 +161,34 @@ $categories = read_categories_controller();
 
             <div id="staff-content" class="menu-content ">
                <h1 class="main-title">Daftar Brand</h1>
+
+               <table>
+                  <thead>
+                        <tr>
+                           <th>Brand ID</th>
+                           <th>Brand Name</th>
+                           <th>Aksi</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                  <?php foreach ($brands as $brand): ?>
+                        <tr>
+                           <td><?= $brand['brand_id'] ?></td>
+                           <td><?= $brand['brand_name'] ?></td>
+                           <td>
+                              <a href="./brand/edit_brand.php?id=<?= $brand['brand_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                              <a href="./brand/delete_brand.php?id=<?= $brand['brand_id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
+                           </td>
+                        </tr>
+                  <?php endforeach; ?>
+                  </tbody>
+               </table>
+
+               <a href="./brand/add_brand.php">
+                  <button class="btn btn-add-user">
+                        Tambah Brand
+                  </button>
+               </a>
             </div>
 
             <div id="staff-content" class="menu-content ">
