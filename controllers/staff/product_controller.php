@@ -2,8 +2,8 @@
 require_once(__DIR__ . '/../../models/product_model.php');
 
 // CREATE
-function create_product_controller($product_name, $brand_id, $category_id, $supplier_id) {
-    return insert_product($product_name, $brand_id, $category_id, $supplier_id);
+function insert_product_controller($product_name, $brand_id, $category_id, $supplier_id, $unit_id) {
+    return insert_product($product_name, $brand_id, $category_id, $supplier_id, $unit_id);
 }
 
 // READ

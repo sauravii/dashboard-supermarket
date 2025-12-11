@@ -6,9 +6,8 @@ $product_id  = $_POST['product_id'];
 $quantity    = $_POST['quantity'];
 $unit_id     = $_POST['unit_id'];
 $supplier_id = $_POST['supplier_id'];
-$user_id     = $_SESSION['user_id'];
 
-add_stock_controller($product_id, $supplier_id, $quantity, $user_id);
+add_stock_controller($product_id, $supplier_id, $quantity, $unit_id);
 
 header("Location: ../dashboard.php");
 exit;

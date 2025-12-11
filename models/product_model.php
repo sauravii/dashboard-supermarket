@@ -29,7 +29,30 @@ function get_all_products() {
 }
 
 // insert product (default status = out of stock)
-function insert_product($product_name, $brand_id, $category_id, $supplier_id) {
+// function insert_product($product_name, $brand_id, $category_id, $supplier_id) {
+//   global $conn;
+//   $default_status_id = 3;
+
+//   // Insert ke tabel product
+//   $query = "INSERT INTO product (product_name, brand_id, category_id, supplier_id, status_id) 
+//             VALUES (?, ?, ?, ?, ?)";
+//   $stmt = mysqli_prepare($conn, $query);
+//   mysqli_stmt_bind_param($stmt, "siiii", $product_name, $brand_id, $category_id, $supplier_id, $default_status_id);
+//   $success = mysqli_stmt_execute($stmt);
+
+//   if ($success) {
+//     $product_id = mysqli_insert_id($conn);
+
+//     $default_unit_id = 1;
+//     $stock_query = "INSERT INTO total_stock (product_id, total_stock, unit_id) VALUES (?, 0, ?)";
+//     $stock_stmt = mysqli_prepare($conn, $stock_query);
+//     mysqli_stmt_bind_param($stock_stmt, "ii", $product_id, $default_unit_id);
+//     mysqli_stmt_execute($stock_stmt);
+//   }
+
+//   return $success;
+// }
+function insert_product($product_name, $brand_id, $category_id, $supplier_id, $unit_id) {
   global $conn;
   $default_status_id = 3;
 
@@ -37,7 +60,18 @@ function insert_product($product_name, $brand_id, $category_id, $supplier_id) {
             VALUES (?, ?, ?, ?, ?)";
   $stmt = mysqli_prepare($conn, $query);
   mysqli_stmt_bind_param($stmt, "siiii", $product_name, $brand_id, $category_id, $supplier_id, $default_status_id);
-  return mysqli_stmt_execute($stmt);
+  $success = mysqli_stmt_execute($stmt);
+
+  if ($success) {
+    $product_id = mysqli_insert_id($conn);
+
+    $stock_query = "INSERT INTO total_stock (product_id, total_stock, unit_id) VALUES (?, 0, ?)";
+    $stock_stmt = mysqli_prepare($conn, $stock_query);
+    mysqli_stmt_bind_param($stock_stmt, "ii", $product_id, $unit_id);
+    mysqli_stmt_execute($stock_stmt);
+  }
+
+  return $success;
 }
 
 // get product by ID

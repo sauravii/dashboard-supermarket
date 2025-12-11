@@ -5,14 +5,15 @@ require_once(__DIR__ . '/../config/db.php');
 function get_all_stocks() {
   global $conn;
   $query = "
-    SELECT ts.product_id, ts.total_stock, ts.unit_id, ts.last_updated_at,
-           p.product_name, p.supplier_id,
+    SELECT p.product_id, p.product_name, p.supplier_id,
+           COALESCE(ts.total_stock, 0) AS total_stock,
+           ts.unit_id, ts.last_updated_at,
            u.unit_name, s.supplier_name
-    FROM total_stock ts
-    JOIN product p ON ts.product_id = p.product_id
-    JOIN qty_unit u ON ts.unit_id = u.unit_id
+    FROM product p
+    LEFT JOIN total_stock ts ON p.product_id = ts.product_id
+    LEFT JOIN qty_unit u ON ts.unit_id = u.unit_id
     JOIN supplier s ON p.supplier_id = s.supplier_id
-    ORDER BY ts.product_id ASC
+    ORDER BY p.product_id ASC
   ";
   $result = mysqli_query($conn, $query);
   return mysqli_fetch_all($result, MYSQLI_ASSOC);

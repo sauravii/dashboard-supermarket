@@ -101,7 +101,7 @@ $statuses = read_status_controller();
                            <th>Brand</th>
                            <th>Kategori</th>
                            <th>Supplier</th>
-                           <th>Stock</th>
+                           <th>Stok</th>
                            <th>Status</th>
                            <th>Aksi</th>
                         </tr>
