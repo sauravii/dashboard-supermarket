@@ -1,5 +1,5 @@
 <?php
-require_once('../../controllers/admin/role_controller.php');
+require_once('../../../controllers/admin/role_controller.php');
 
 $role_id = $_GET['id'];
 $role = read_role_by_id_controller($role_id);
@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $role_name = $_POST['role_name'];
 
     update_role_controller($role_id, $role_name);
-    header("Location: dashboard.php");
+    header("Location: ../dashboard.php");
     exit;
 }
 ?>

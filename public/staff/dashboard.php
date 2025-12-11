@@ -42,20 +42,20 @@ $adjustments = read_stock_adjustment_controller();
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- CSS -->
-     <link rel="stylesheet" href="../../assets/css/admin_dashboard.css">
+     <link rel="stylesheet" href="../../assets/css/dashboard.css">
 
     <!-- JS -->
-   <script src="../../assets/js/admin_dashboard.js" async></script>
+   <script src="../../assets/js/dashboard.js" async></script>
 </head>
 <body>
     <!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> AdminSite</a>
 		<ul class="side-menu">
-            <li><a href="#" class="menu-btn active" data-target="staff-content"><i class='bx bxs-widget icon'></i> Product & Category</a></li>
-            <li><a href="#" class="menu-btn" data-target="staff-content"><i class='bx bxs-chart icon'></i> Stock Product</a></li>
+            <li><a href="#" class="menu-btn active" data-target="staff-content"><i class='bx bxs-widget icon'></i> Produk & Kategori</a></li>
+            <li><a href="#" class="menu-btn" data-target="staff-content"><i class='bx bxs-chart icon'></i> Stok Produk</a></li>
             <li><a href="#" class="menu-btn" data-target="role-content"><i class='bx bxs-truck icon'></i> Supplier & Brand</a></li>
-            <li><a href="#" class="menu-btn" data-target="role-content"><i class='bx bxs-report icon'></i> Restock History</a></li>
+            <li><a href="#" class="menu-btn" data-target="role-content"><i class='bx bxs-report icon'></i>Laporan Stok</a></li>
         </ul>
 	</section>
 	<!-- SIDEBAR -->
@@ -67,7 +67,7 @@ $adjustments = read_stock_adjustment_controller();
 
          <form action="#">
             <div class="form-group">
-               <input type="text" placeholder="Search..">
+               <input type="text" placeholder="Cari..">
             </div>
          </form>
 
@@ -98,8 +98,8 @@ $adjustments = read_stock_adjustment_controller();
                <table>
                   <thead>
                         <tr>
-                           <th>Product ID</th>
-                           <th>Product Name</th>
+                           <th>Produk ID</th>
+                           <th>Nama Produk</th>
                            <th>Brand</th>
                            <th>Kategori</th>
                            <th>Supplier</th>
@@ -139,8 +139,8 @@ $adjustments = read_stock_adjustment_controller();
                <table>
                   <thead>
                      <tr>
-                        <th>Category ID</th>
-                        <th>Category Name</th>
+                        <th>Kategori ID</th>
+                        <th>Nama Kategori</th>
                         <th>Aksi</th>
                      </tr>
                   </thead>
@@ -171,7 +171,7 @@ $adjustments = read_stock_adjustment_controller();
                <table>
                   <thead>
                      <tr>
-                        <th>Product ID</th>
+                        <th>Produk ID</th>
                         <th>Nama Produk</th>
                         <th>Stok Saat Ini</th>
                         <th>Unit Produk</th>
@@ -207,7 +207,7 @@ $adjustments = read_stock_adjustment_controller();
                <table>
                   <thead>
                      <tr>
-                        <th>Product ID</th>
+                        <th>Produk ID</th>
                         <th>Nama Produk</th>
                         <th>Stok Saat Ini</th>
                         <th>Unit Produk</th>
@@ -244,7 +244,7 @@ $adjustments = read_stock_adjustment_controller();
                   <thead>
                         <tr>
                            <th>Supplier ID</th>
-                           <th>Supplier Name</th>
+                           <th>Nama Supplier</th>
                            <th>Alamat</th>
                            <th>Nomor Telepon</th>
                            <th>Aksi</th>
@@ -280,7 +280,7 @@ $adjustments = read_stock_adjustment_controller();
                   <thead>
                         <tr>
                            <th>Brand ID</th>
-                           <th>Brand Name</th>
+                           <th>Nama Brand</th>
                            <th>Aksi</th>
                         </tr>
                   </thead>

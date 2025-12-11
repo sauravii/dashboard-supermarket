@@ -1,14 +1,9 @@
 <?php
-require_once('../../controllers/admin/user_controller.php');
-require_once('../../controllers/admin/role_controller.php');
+require_once('../../../controllers/admin/user_controller.php');
+require_once('../../../controllers/admin/role_controller.php');
 
-// get user ID
 $user_id = $_GET['id'];
-
-// get all user ID
 $user = read_user_by_id_controller($user_id);
-
-// get all role
 $roles = read_roles_controller();
 
 // handle form submit
@@ -18,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $role_id  = $_POST['role_id'];
 
     update_user_controller($user_id, $username, $password, $role_id);
-    header("Location: dashboard.php");
+    header("Location: ../dashboard.php");
     exit;
 }
 ?>

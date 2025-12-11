@@ -1,12 +1,12 @@
 <?php
-require_once('../../controllers/admin/role_controller.php');
+require_once('../../../controllers/admin/role_controller.php');
 
 // handle form submit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $role_name = $_POST['role_name'];
 
     create_role_controller($role_name);
-    header("Location: dashboard.php"); 
+    header("Location: ../dashboard.php"); 
     exit;
 }
 ?>

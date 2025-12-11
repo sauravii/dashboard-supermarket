@@ -26,18 +26,18 @@ $roles = read_roles_controller();
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- CSS -->
-     <link rel="stylesheet" href="../../assets/css/admin_dashboard.css">
+     <link rel="stylesheet" href="../../assets/css/dashboard.css">
 
     <!-- JS -->
-   <script src="../../assets/js/admin_dashboard.js" async></script>
+   <script src="../../assets/js/dashboard.js" async></script>
 </head>
 <body>
     <!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> AdminSite</a>
 		<ul class="side-menu">
-         <li><a href="#" class="menu-btn active" data-target="staff-content"><i class='bx bxs-widget icon'></i> Staff Management</a></li>
-         <li><a href="#" class="menu-btn" data-target="role-content"><i class='bx bxs-chart icon'></i> Role Management</a></li>
+         <li><a href="#" class="menu-btn active" data-target="staff-content"><i class='bx bxs-widget icon'></i> Kelola Staff </a></li>
+         <li><a href="#" class="menu-btn" data-target="role-content"><i class='bx bxs-chart icon'></i>Kelola Role</a></li>
       </ul>
 	</section>
 	<!-- SIDEBAR -->
@@ -49,7 +49,7 @@ $roles = read_roles_controller();
 
          <form action="#">
             <div class="form-group">
-               <input type="text" placeholder="Search..">
+               <input type="text" placeholder="Cari..">
             </div>
          </form>
 
@@ -97,15 +97,15 @@ $roles = read_roles_controller();
                            <td><?= $user['role_id'] ?></td>
                            <td><?= $user['created_at'] ?></td>
                            <td>
-                              <a href="edit_user.php?id=<?= $user['user_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                              <a href="delete_user.php?id=<?= $user['user_id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
+                              <a href="./user/edit_user.php?id=<?= $user['user_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                              <a href="./user/delete_user.php?id=<?= $user['user_id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
                            </td>
                         </tr>
                      <?php endforeach; ?>
                   </tbody>
                </table>
 
-               <a href="./add_user.php">
+               <a href="./user/add_user.php">
                   <button class="btn btn-add-user">
                      Tambah Pengguna
                   </button>
@@ -113,12 +113,12 @@ $roles = read_roles_controller();
             </div>
 
             <div id="role-content" class="menu-content">
-               <h1 class="main-title">Role Management</h1>
+               <h1 class="main-title">Daftar Role</h1>
                <table>
                   <thead>
                      <tr>
                         <th>Role ID</th>
-                        <th>Role Name</th>
+                        <th>Jenis Role</th>
                         <th>Dibuat Pada</th>
                         <th>Aksi</th>
                      </tr>
@@ -130,15 +130,15 @@ $roles = read_roles_controller();
                            <td><?= $role['role_name'] ?></td>
                            <td><?= $role['created_at'] ?></td>
                            <td>
-                              <a href="edit_role.php?id=<?= $user['user_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                              <!-- <a href="delete_role.php?id=<?= $user['user_id'] ?>" class="btn btn-danger btn-sm">Hapus</a> -->
+                              <a href="./role/edit_role.php?id=<?= $user['user_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                              <!-- <a href="./role/delete_role.php?id=<?= $user['user_id'] ?>" class="btn btn-danger btn-sm">Hapus</a> -->
                            </td>
                         </tr>
                      <?php endforeach; ?>
                   </tbody>
                </table>
 
-               <a href="./add_role.php">
+               <a href="./role/add_role.php">
                   <button class="btn btn-add-user">
                      Tambah Role
                   </button>

@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="mb-3">
         <label class="form-label">Status (Manual Override)</label>
         <select name="status_id" class="form-select">
-          <option value="">Pilih Status</option>
+          <option value="">-- Pilih Status --</option>
           <?php foreach ($statuses as $status): ?>
             <option value="<?= $status['status_id'] ?>"
               <?= isset($product['status_id']) && $product['status_id'] == $status['status_id'] ? 'selected' : '' ?>>

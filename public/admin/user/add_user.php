@@ -1,6 +1,6 @@
 <?php
-require_once('../../controllers/admin/user_controller.php');
-require_once('../../controllers/admin/role_controller.php');
+require_once('../../../controllers/admin/user_controller.php');
+require_once('../../../controllers/admin/role_controller.php');
 
 // get role
 $roles = read_roles_controller();
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $role_id  = $_POST['role_id'];
 
     create_user_controller($username, $password, $role_id);
-    header("Location: dashboard.php"); 
+    header("Location: ../dashboard.php"); 
     exit;
 }
 ?>
