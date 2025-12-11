@@ -10,11 +10,11 @@ function get_all_suppliers() {
 }
 
 // insert supplier
-function insert_supplier($supplier_name) {
+function insert_supplier($supplier_name, $supplier_address, $supplier_phoneNum) {
   global $conn;
-  $query = "INSERT INTO supplier (supplier_name) VALUES (?)";
+  $query = "INSERT INTO supplier (supplier_name, supplier_address, supplier_phoneNum) VALUES (?, ?, ?)";
   $stmt = mysqli_prepare($conn, $query);
-  mysqli_stmt_bind_param($stmt, "s", $supplier_name);
+  mysqli_stmt_bind_param($stmt, "sss", $supplier_name, $supplier_address, $supplier_phoneNum);
   return mysqli_stmt_execute($stmt);
 }
 
@@ -30,11 +30,13 @@ function get_supplier_by_id($supplier_id) {
 }
 
 // update supplier
-function update_supplier($supplier_id, $supplier_name) {
+function update_supplier($supplier_id, $supplier_name, $supplier_address, $supplier_phoneNum) {
   global $conn;
-  $query = "UPDATE supplier SET supplier_name = ? WHERE supplier_id = ?";
+  $query = "UPDATE supplier 
+            SET supplier_name = ?, supplier_address = ?, supplier_phoneNum = ? 
+            WHERE supplier_id = ?";
   $stmt = mysqli_prepare($conn, $query);
-  mysqli_stmt_bind_param($stmt, "si", $supplier_name, $supplier_id);
+  mysqli_stmt_bind_param($stmt, "sssi", $supplier_name, $supplier_address, $supplier_phoneNum, $supplier_id);
   return mysqli_stmt_execute($stmt);
 }
 

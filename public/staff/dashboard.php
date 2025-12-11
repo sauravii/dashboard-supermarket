@@ -16,12 +16,14 @@ require_once('../../controllers/admin/role_controller.php');
 require_once('../../controllers/staff/product_controller.php');
 require_once('../../controllers/staff/category_controller.php');
 require_once('../../controllers/staff/brand_controller.php');
+require_once('../../controllers/staff/supplier_controller.php');
 
 $users = read_users_controller();
 $roles = read_roles_controller();
 $products = read_product_controller();
 $categories = read_categories_controller();
 $brands = read_brand_controller();
+$suppliers = read_suppliers_controller();
 
 ?>
 <!DOCTYPE html>
@@ -157,6 +159,38 @@ $brands = read_brand_controller();
 
             <div id="staff-content" class="menu-content ">
                <h1 class="main-title">Daftar Supplier</h1>
+
+                <table>
+                  <thead>
+                        <tr>
+                           <th>Supplier ID</th>
+                           <th>Supplier Name</th>
+                           <th>Alamat</th>
+                           <th>Nomor Telepon</th>
+                           <th>Aksi</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                  <?php foreach ($suppliers as $supplier): ?>
+                        <tr>
+                           <td><?= $supplier['supplier_id'] ?></td>
+                           <td><?= $supplier['supplier_name'] ?></td>
+                           <td><?= $supplier['supplier_address'] ?></td>
+                           <td><?= $supplier['supplier_phoneNum'] ?></td>
+                           <td>
+                              <a href="./supplier/edit_supplier.php?id=<?= $supplier['supplier_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                              <a href="./supplier/delete_supplier.php?id=<?= $supplier['supplier_id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
+                           </td>
+                        </tr>
+                  <?php endforeach; ?>
+                  </tbody>
+               </table>
+
+               <a href="./supplier/add_supplier.php">
+                  <button class="btn btn-add-user">
+                        Tambah Supplier
+                  </button>
+               </a>
             </div>
 
             <div id="staff-content" class="menu-content ">
