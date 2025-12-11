@@ -328,6 +328,15 @@ table .btn-danger {
   font-weight: 500;
   cursor: pointer;
 }
+.btn-success {
+  background-color: #dc3545;
+  color: var(--light);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
 .btn-add-user {
   background-color: #0d6efd;
   color: var(--light);

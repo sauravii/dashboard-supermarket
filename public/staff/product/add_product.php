@@ -11,7 +11,6 @@ require_once('../../../controllers/staff/brand_controller.php');
 require_once('../../../controllers/staff/category_controller.php');
 require_once('../../../controllers/staff/supplier_controller.php');
 
-// get data
 $brands = read_brand_controller();
 $categories = read_categories_controller();
 $suppliers = read_suppliers_controller();

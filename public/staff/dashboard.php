@@ -17,6 +17,8 @@ require_once('../../controllers/staff/product_controller.php');
 require_once('../../controllers/staff/category_controller.php');
 require_once('../../controllers/staff/brand_controller.php');
 require_once('../../controllers/staff/supplier_controller.php');
+require_once('../../controllers/staff/stock_controller.php');
+require_once('../../controllers/staff/unit_controller.php');
 
 $users = read_users_controller();
 $roles = read_roles_controller();
@@ -24,6 +26,8 @@ $products = read_product_controller();
 $categories = read_categories_controller();
 $brands = read_brand_controller();
 $suppliers = read_suppliers_controller();
+$stocks = read_all_stocks_controller();
+$units = read_units_controller();
 
 ?>
 <!DOCTYPE html>
@@ -154,7 +158,43 @@ $suppliers = read_suppliers_controller();
             </div>
 
             <div id="staff-content" class="menu-content ">
-               <h1 class="main-title">Update Stok</h1>
+               <h1 class="main-title">Tambah Stok</h1>
+
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Product ID</th>
+                        <th>Nama Produk</th>
+                        <th>Stok Saat Ini</th>
+                        <th>Unit Produk</th>
+                        <th>Tambah Stok</th>
+                        <th>Aksi</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <?php foreach ($stocks as $stock): ?>
+                        <tr>
+                        <form method="POST" action="../staff/stock/add_stock.php">
+                           <td><?= $stock['product_id'] ?></td>
+                           <td><?= $stock['product_name'] ?></td>
+                           <td><?= $stock['total_stock'] ?></td>
+                           <td><?= $stock['unit_name'] ?></td>
+                           <td>
+                              <input type="number" name="quantity" min="1" required>
+                              <input type="hidden" name="product_id" value="<?= $stock['product_id'] ?>">
+                              <input type="hidden" name="unit_id" value="<?= $stock['unit_id'] ?>">
+                              <input type="hidden" name="supplier_id" value="<?= $stock['supplier_id'] ?>">
+                           </td>
+                           <td><button type="submit" class="btn btn-warning">Update</button></td>
+                        </form>
+                        </tr>
+                     <?php endforeach; ?>
+                  </tbody>
+               </table>
+            </div>
+
+            <div id="staff-content" class="menu-content ">
+               <h1 class="main-title">Kurangi Stok</h1>
             </div>
 
             <div id="staff-content" class="menu-content ">
