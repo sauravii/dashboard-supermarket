@@ -185,7 +185,7 @@ $units = read_units_controller();
                               <input type="hidden" name="unit_id" value="<?= $stock['unit_id'] ?>">
                               <input type="hidden" name="supplier_id" value="<?= $stock['supplier_id'] ?>">
                            </td>
-                           <td><button type="submit" class="btn btn-warning">Update</button></td>
+                           <td><button type="submit" class="btn btn-warning">Tambah</button></td>
                         </form>
                         </tr>
                      <?php endforeach; ?>
@@ -195,6 +195,38 @@ $units = read_units_controller();
 
             <div id="staff-content" class="menu-content ">
                <h1 class="main-title">Kurangi Stok</h1>
+
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Product ID</th>
+                        <th>Nama Produk</th>
+                        <th>Stok Saat Ini</th>
+                        <th>Unit Produk</th>
+                        <th>Kurangi Stok</th>
+                        <th>Aksi</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <?php foreach ($stocks as $stock): ?>
+                        <tr>
+                        <form method="POST" action="../staff/stock/remove_stock.php">
+                           <td><?= $stock['product_id'] ?></td>
+                           <td><?= $stock['product_name'] ?></td>
+                           <td><?= $stock['total_stock'] ?></td>
+                           <td><?= $stock['unit_name'] ?></td>
+                           <td>
+                              <input type="number" name="quantity" min="1" required>
+                              <input type="hidden" name="product_id" value="<?= $stock['product_id'] ?>">
+                              <input type="hidden" name="unit_id" value="<?= $stock['unit_id'] ?>">
+                              <input type="hidden" name="supplier_id" value="<?= $stock['supplier_id'] ?>">
+                           </td>
+                           <td><button type="submit" class="btn btn-warning">Kurangi</button></td>
+                        </form>
+                        </tr>
+                     <?php endforeach; ?>
+                  </tbody>
+               </table>
             </div>
 
             <div id="staff-content" class="menu-content ">

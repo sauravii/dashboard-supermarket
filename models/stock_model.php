@@ -36,17 +36,29 @@ function add_stock($product_id, $supplier_id, $quantity, $unit_id) {
 
 
 // remove stock
-function remove_stock($product_id, $quantity, $unit_id, $reason) {
+function remove_stock($product_id, $supplier_id, $quantity, $unit_id) {
     global $conn;
+
+    $stmt = $conn->prepare("SELECT total_stock FROM total_stock WHERE product_id = ?");
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $current = $result->fetch_assoc();
+    $stmt->close();
+
+    if ($current['total_stock'] < $quantity) {
+        echo "<script>alert('Stok tidak cukup untuk dikurangi!'); window.history.back();</script>";
+        exit;
+    }
 
     $stmt = $conn->prepare("UPDATE total_stock SET total_stock = total_stock - ? WHERE product_id = ?");
     $stmt->bind_param("ii", $quantity, $product_id);
     $stmt->execute();
     $stmt->close();
 
-    $stmt = $conn->prepare("INSERT INTO stock_adjustment (product_id, unit_id, quantity_removed, reason, created_at) 
+    $stmt = $conn->prepare("INSERT INTO stock_adjustment (product_id, supplier_id, quantity_removed, unit_id, log_date) 
                             VALUES (?, ?, ?, ?, NOW())");
-    $stmt->bind_param("iiis", $product_id, $unit_id, $quantity, $reason);
+    $stmt->bind_param("iiii", $product_id, $supplier_id, $quantity, $unit_id);
     $stmt->execute();
     $stmt->close();
 }
