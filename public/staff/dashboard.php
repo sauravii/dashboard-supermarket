@@ -30,6 +30,8 @@ $suppliers = read_suppliers_controller();
 $stocks = read_all_stocks_controller();
 $units = read_units_controller();
 $statuses = read_status_controller();
+$restocks = read_restock_history_controller();
+$adjustments = read_stock_adjustment_controller();
 
 ?>
 <!DOCTYPE html>
@@ -304,7 +306,56 @@ $statuses = read_status_controller();
             </div>
 
             <div id="staff-content" class="menu-content ">
-               <h1 class="main-title">Histori Restock</h1>
+               <h1 class="main-title">Histori Penambahan Stok</h1>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Produk</th>
+                        <th>Supplier</th>
+                        <th>Jumlah</th>
+                        <th>Unit</th>
+                        <th>Tanggal</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <?php foreach ($restocks as $r): ?>
+                        <tr>
+                        <td><?= $r['product_name'] ?></td>
+                        <td><?= $r['supplier_name'] ?></td>
+                        <td><?= $r['quantity_change'] ?></td>
+                        <td><?= $r['unit_name'] ?></td>
+                        <td><?= date('d M Y H:i', strtotime($r['log_date'])) ?></td>
+                        </tr>
+                     <?php endforeach; ?>
+                  </tbody>
+               </table>
+            </div>   
+
+            <div id="staff-content" class="menu-content ">
+               <h1 class="main-title">Histori Pengurangan Stok</h1>
+
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Produk</th>
+                        <th>Supplier</th>
+                        <th>Jumlah</th>
+                        <th>Unit</th>
+                        <th>Tanggal</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <?php foreach ($adjustments as $a): ?>
+                        <tr>
+                        <td><?= $a['product_name'] ?></td>
+                        <td><?= $a['supplier_name'] ?></td>
+                        <td><?= $a['quantity_removed'] ?></td>
+                        <td><?= $a['unit_name'] ?></td>
+                        <td><?= date('d M Y H:i', strtotime($a['log_date'])) ?></td>
+                        </tr>
+                     <?php endforeach; ?>
+                  </tbody>
+               </table>
             </div>   
        </div>
       <!-- MAIN CONTENT -->

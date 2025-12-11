@@ -63,4 +63,35 @@ function remove_stock($product_id, $supplier_id, $quantity, $unit_id) {
     $stmt->execute();
     $stmt->close();
 }
+
+// get data restock history
+function get_restock_history() {
+  global $conn;
+  $query = "
+    SELECT rh.*, p.product_name, s.supplier_name, u.unit_name
+    FROM restock_history rh
+    JOIN product p ON rh.product_id = p.product_id
+    JOIN supplier s ON rh.supplier_id = s.supplier_id
+    JOIN qty_unit u ON rh.unit_id = u.unit_id
+    ORDER BY rh.log_date DESC
+  ";
+  $result = mysqli_query($conn, $query);
+  return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+// get data stok adjustment
+function get_stock_adjustment() {
+  global $conn;
+  $query = "
+    SELECT sa.*, p.product_name, s.supplier_name, u.unit_name
+    FROM stock_adjustment sa
+    JOIN product p ON sa.product_id = p.product_id
+    JOIN supplier s ON sa.supplier_id = s.supplier_id
+    JOIN qty_unit u ON sa.unit_id = u.unit_id
+    ORDER BY sa.log_date DESC
+  ";
+  $result = mysqli_query($conn, $query);
+  return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
 ?>
