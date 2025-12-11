@@ -28,9 +28,6 @@ $roles = read_roles_controller();
     <!-- CSS -->
      <link rel="stylesheet" href="../../assets/css/admin_dashboard.css">
 
-   <!-- BOOTSTRAP -->
-   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-
     <!-- JS -->
    <script src="../../assets/js/admin_dashboard.js" async></script>
 </head>
@@ -39,10 +36,8 @@ $roles = read_roles_controller();
 	<section id="sidebar">
 		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> AdminSite</a>
 		<ul class="side-menu">
-         <li><a href="#" class="menu-btn active" data-target="dashboard-content"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-         <li><a href="#" class="menu-btn" data-target="staff-content"><i class='bx bxs-widget icon'></i> Staff Management</a></li>
+         <li><a href="#" class="menu-btn active" data-target="staff-content"><i class='bx bxs-widget icon'></i> Staff Management</a></li>
          <li><a href="#" class="menu-btn" data-target="role-content"><i class='bx bxs-chart icon'></i> Role Management</a></li>
-         <li><a href="#" class="menu-btn" data-target="activity-content"><i class='bx bx-table icon'></i> Activity Log</a></li>
       </ul>
 	</section>
 	<!-- SIDEBAR -->
@@ -148,12 +143,7 @@ $roles = read_roles_controller();
                      Tambah Role
                   </button>
                </a>
-            </div>
-
-            <div id="activity-content" class="menu-content hide">
-               <h1>Activity Log</h1>
-               <p>Ini halaman activity log</p>
-            </div>
+            </div> 
        </div>
       <!-- MAIN CONTENT -->
 	</section>
