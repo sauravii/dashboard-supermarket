@@ -58,7 +58,7 @@ $roles = read_roles_controller();
          <div class="profile">
             <img src="../../assets/images/img-profile.jpg" alt="" id="profile-ava">
             <div class="profile-link hidden" id="profile-link">
-               <p class="greetings">Hello, Admin</p>
+               <p class="greetings">Hello, <?= htmlspecialchars($_SESSION['username']) ?></p>
                <div class="logout">
                   <img src="../../assets/icons/ic-signout.svg" alt="" class="ic-logout" >
                   <p class="text-logout">Logout</p>

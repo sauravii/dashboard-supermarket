@@ -7,19 +7,136 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 
 if ($_SESSION['role_id'] != 2) { 
-    header("Location: /supermarket-app/public/admin/dashboard.php");
+    header("Location: /supermarket-app/public/staff/dashboard.php");
     exit;
 }
+
+require_once('../../controllers/admin/user_controller.php');
+require_once('../../controllers/admin/role_controller.php');
+require_once('../../controllers/staff/product_controller.php');
+
+$users = read_users_controller();
+$roles = read_roles_controller();
+$products = read_product_controller();
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Staff Dashboard</title>
+    <title>Admin Dashboard</title>
+    <!-- Emoji -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- CSS -->
+     <link rel="stylesheet" href="../../assets/css/admin_dashboard.css">
+
+    <!-- JS -->
+   <script src="../../assets/js/admin_dashboard.js" async></script>
 </head>
 <body>
-    <h1>Hello Staff</h1>
-    <p>Welcome to the staff dashboard</p>
+    <!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> AdminSite</a>
+		<ul class="side-menu">
+            <li><a href="#" class="menu-btn active" data-target="staff-content"><i class='bx bxs-widget icon'></i> Product & Category</a></li>
+            <li><a href="#" class="menu-btn" data-target="staff-content"><i class='bx bxs-chart icon'></i> Stock Product</a></li>
+            <li><a href="#" class="menu-btn" data-target="role-content"><i class='bx bxs-truck icon'></i> Supplier & Brand</a></li>
+            <li><a href="#" class="menu-btn" data-target="role-content"><i class='bx bxs-report icon'></i> Restock History</a></li>
+        </ul>
+	</section>
+	<!-- SIDEBAR -->
 
-    <a href="../logout.php">Logout</a>
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+         <i class="bx bx-menu toggle-sidebar"></i>
+
+         <form action="#">
+            <div class="form-group">
+               <input type="text" placeholder="Search..">
+            </div>
+         </form>
+
+         <span class="divider"></span>
+
+         <div class="profile">
+            <img src="../../assets/images/img-profile.jpg" alt="" id="profile-ava">
+            <div class="profile-link hidden" id="profile-link">
+               <p class="greetings">Hello, <?= htmlspecialchars($_SESSION['username']) ?></p>
+               <div class="logout">
+                  <img src="../../assets/icons/ic-signout.svg" alt="" class="ic-logout" >
+                  <p class="text-logout">Logout</p>
+               </div>
+            </div>
+         </div>
+      </nav>
+		<!-- NAVBAR -->
+
+      <!-- MAIN CONTENT -->
+       <div class="main-content">
+             <div id="dashboard-content" class="menu-content">
+               <h1 class="main-title">Dashboard</h1>
+               <a href="../logout.php">Dummy Logout</a>
+            </div>
+
+            <div id="staff-content" class="menu-content ">
+               <h1 class="main-title">Daftar Produk</h1>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Brand</th>
+                        <th>Kategori</th>
+                        <th>Supplier</th>
+                        <th>Aksi</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                  <?php foreach ($products as $product): ?>
+                     <tr>
+                        <td><?= $product['product_id'] ?></td>
+                        <td><?= $product['product_name'] ?></td>
+                        <td><?= $product['brand_name'] ?></td>
+                        <td><?= $product['category_name'] ?></td>
+                        <td><?= $product['supplier_name'] ?></td>
+                        <td>
+                        <a href="./product/edit_product.php?id=<?= $product['product_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="./product/delete_product.php?id=<?= $product['product_id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
+                        </td>
+                     </tr>
+                  <?php endforeach; ?>
+                  </tbody>
+               </table>
+
+               <a href="./product/add_product.php">
+                  <button class="btn btn-add-user">
+                     Tambah Produk
+                  </button>
+               </a>
+            </div>
+
+            <div id="staff-content" class="menu-content ">
+               <h1 class="main-title">Daftar Kategori</h1>
+            </div>
+
+            <div id="staff-content" class="menu-content ">
+               <h1 class="main-title">Update Stok</h1>
+            </div>
+
+            <div id="staff-content" class="menu-content ">
+               <h1 class="main-title">Daftar Supplier</h1>
+            </div>
+
+            <div id="staff-content" class="menu-content ">
+               <h1 class="main-title">Daftar Brand</h1>
+            </div>
+
+            <div id="staff-content" class="menu-content ">
+               <h1 class="main-title">Histori Restock</h1>
+            </div>   
+       </div>
+      <!-- MAIN CONTENT -->
+	</section>
 </body>
 </html>
