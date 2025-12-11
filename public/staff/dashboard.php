@@ -19,6 +19,7 @@ require_once('../../controllers/staff/brand_controller.php');
 require_once('../../controllers/staff/supplier_controller.php');
 require_once('../../controllers/staff/stock_controller.php');
 require_once('../../controllers/staff/unit_controller.php');
+require_once('../../controllers/staff/status_controller.php');
 
 $users = read_users_controller();
 $roles = read_roles_controller();
@@ -28,6 +29,7 @@ $brands = read_brand_controller();
 $suppliers = read_suppliers_controller();
 $stocks = read_all_stocks_controller();
 $units = read_units_controller();
+$statuses = read_status_controller();
 
 ?>
 <!DOCTYPE html>
@@ -93,35 +95,39 @@ $units = read_units_controller();
                <h1 class="main-title">Daftar Produk</h1>
                <table>
                   <thead>
-                     <tr>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Brand</th>
-                        <th>Kategori</th>
-                        <th>Supplier</th>
-                        <th>Aksi</th>
-                     </tr>
+                        <tr>
+                           <th>Product ID</th>
+                           <th>Product Name</th>
+                           <th>Brand</th>
+                           <th>Kategori</th>
+                           <th>Supplier</th>
+                           <th>Stock</th>
+                           <th>Status</th>
+                           <th>Aksi</th>
+                        </tr>
                   </thead>
                   <tbody>
                   <?php foreach ($products as $product): ?>
-                     <tr>
-                        <td><?= $product['product_id'] ?></td>
-                        <td><?= $product['product_name'] ?></td>
-                        <td><?= $product['brand_name'] ?></td>
-                        <td><?= $product['category_name'] ?></td>
-                        <td><?= $product['supplier_name'] ?></td>
-                        <td>
-                        <a href="./product/edit_product.php?id=<?= $product['product_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="./product/delete_product.php?id=<?= $product['product_id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
-                        </td>
-                     </tr>
+                        <tr>
+                           <td><?= $product['product_id'] ?></td>
+                           <td><?= $product['product_name'] ?></td>
+                           <td><?= $product['brand_name'] ?></td>
+                           <td><?= $product['category_name'] ?></td>
+                           <td><?= $product['supplier_name'] ?></td>
+                           <td><?= $product['total_stock'] ?? 0 ?> <?= $product['unit_name'] ?? '' ?></td>
+                           <td><?= $product['status_name'] ?></td>
+                           <td>
+                              <a href="./product/edit_product.php?id=<?= $product['product_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                              <a href="./product/delete_product.php?id=<?= $product['product_id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
+                           </td>
+                        </tr>
                   <?php endforeach; ?>
                   </tbody>
                </table>
 
                <a href="./product/add_product.php">
                   <button class="btn btn-add-user">
-                     Tambah Produk
+                        Tambah Produk
                   </button>
                </a>
             </div>

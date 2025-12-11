@@ -16,9 +16,9 @@ function read_product_by_id_controller($product_id) {
     return get_product_by_id($product_id);
 }
 
-// UPDATE
-function update_product_controller($product_id, $product_name, $brand_id, $category_id, $supplier_id) {
-    return update_product($product_id, $product_name, $brand_id, $category_id, $supplier_id);
+// UPDATE 
+function update_product_controller($product_id, $product_name, $brand_id, $category_id, $supplier_id, $status_id = null){
+    return update_product($product_id, $product_name, $brand_id, $category_id, $supplier_id, $status_id);
 }
 
 // DELETE

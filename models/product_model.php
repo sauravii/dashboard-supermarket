@@ -8,30 +8,62 @@ function get_all_products() {
     SELECT p.product_id, p.product_name,
            b.brand_name,
            c.category_name,
-           s.supplier_name
+           s.supplier_name,
+           CASE 
+             WHEN p.status_id = 4 THEN 'OTW'
+             WHEN ts.total_stock > 50 THEN 'available'
+             WHEN ts.total_stock > 0 THEN 'need restock'
+             ELSE 'out of stock'
+           END AS status_name,
+           ts.total_stock,
+           ts.last_updated_at
     FROM product p
     JOIN brand b ON p.brand_id = b.brand_id
     JOIN category c ON p.category_id = c.category_id
     JOIN supplier s ON p.supplier_id = s.supplier_id
+    LEFT JOIN total_stock ts ON p.product_id = ts.product_id
     ORDER BY p.product_id ASC
   ";
   $result = mysqli_query($conn, $query);
   return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-// insert product
+// insert product (default status = out of stock)
 function insert_product($product_name, $brand_id, $category_id, $supplier_id) {
   global $conn;
-  $query = "INSERT INTO product (product_name, brand_id, category_id, supplier_id) VALUES (?, ?, ?, ?)";
+  $default_status_id = 3;
+
+  $query = "INSERT INTO product (product_name, brand_id, category_id, supplier_id, status_id) 
+            VALUES (?, ?, ?, ?, ?)";
   $stmt = mysqli_prepare($conn, $query);
-  mysqli_stmt_bind_param($stmt, "siii", $product_name, $brand_id, $category_id, $supplier_id);
+  mysqli_stmt_bind_param($stmt, "siiii", $product_name, $brand_id, $category_id, $supplier_id, $default_status_id);
   return mysqli_stmt_execute($stmt);
 }
 
 // get product by ID
 function get_product_by_id($product_id) {
   global $conn;
-  $query = "SELECT * FROM product WHERE product_id = ?";
+  $query = "
+    SELECT p.product_id, p.product_name,
+           p.brand_id, p.category_id, p.supplier_id,
+           b.brand_name,
+           c.category_name,
+           s.supplier_name,
+           CASE 
+             WHEN p.status_id = 4 THEN 'OTW'
+             WHEN ts.total_stock > 50 THEN 'available'
+             WHEN ts.total_stock > 0 THEN 'need restock'
+             ELSE 'out of stock'
+           END AS status_name,
+           ts.total_stock,
+           ts.last_updated_at
+    FROM product p
+    JOIN brand b ON p.brand_id = b.brand_id
+    JOIN category c ON p.category_id = c.category_id
+    JOIN supplier s ON p.supplier_id = s.supplier_id
+    LEFT JOIN total_stock ts ON p.product_id = ts.product_id
+    WHERE p.product_id = ?
+  ";
   $stmt = mysqli_prepare($conn, $query);
   mysqli_stmt_bind_param($stmt, "i", $product_id);
   mysqli_stmt_execute($stmt);
@@ -39,12 +71,24 @@ function get_product_by_id($product_id) {
   return mysqli_fetch_assoc($result);
 }
 
-// update product
-function update_product($product_id, $product_name, $brand_id, $category_id, $supplier_id) {
+// update product 
+function update_product($product_id, $product_name, $brand_id, $category_id, $supplier_id, $status_id = null) {
   global $conn;
-  $query = "UPDATE product SET product_name = ?, brand_id = ?, category_id = ?, supplier_id = ? WHERE product_id = ?";
-  $stmt = mysqli_prepare($conn, $query);
-  mysqli_stmt_bind_param($stmt, "siiii", $product_name, $brand_id, $category_id, $supplier_id, $product_id);
+
+  if ($status_id !== null) {
+    $query = "UPDATE product 
+              SET product_name = ?, brand_id = ?, category_id = ?, supplier_id = ?, status_id = ? 
+              WHERE product_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "siiiii", $product_name, $brand_id, $category_id, $supplier_id, $status_id, $product_id);
+  } else {
+    $query = "UPDATE product 
+              SET product_name = ?, brand_id = ?, category_id = ?, supplier_id = ? 
+              WHERE product_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "siiii", $product_name, $brand_id, $category_id, $supplier_id, $product_id);
+  }
+
   return mysqli_stmt_execute($stmt);
 }
 
