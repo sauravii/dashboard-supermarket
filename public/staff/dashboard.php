@@ -14,10 +14,12 @@ if ($_SESSION['role_id'] != 2) {
 require_once('../../controllers/admin/user_controller.php');
 require_once('../../controllers/admin/role_controller.php');
 require_once('../../controllers/staff/product_controller.php');
+require_once('../../controllers/staff/category_controller.php');
 
 $users = read_users_controller();
 $roles = read_roles_controller();
 $products = read_product_controller();
+$categories = read_categories_controller();
 
 ?>
 <!DOCTYPE html>
@@ -118,6 +120,33 @@ $products = read_product_controller();
 
             <div id="staff-content" class="menu-content ">
                <h1 class="main-title">Daftar Kategori</h1>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Category ID</th>
+                        <th>Category Name</th>
+                        <th>Aksi</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                  <?php foreach ($categories as $category): ?>
+                     <tr>
+                        <td><?= $category['category_id'] ?></td>
+                        <td><?= $category['category_name'] ?></td>
+                        <td>
+                        <a href="./category/edit_category.php?id=<?= $category['category_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="./category/delete_category.php?id=<?= $category['category_id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
+                        </td>
+                     </tr>
+                  <?php endforeach; ?>
+                  </tbody>
+               </table>
+
+               <a href="./category/add_category.php">
+                  <button class="btn btn-add-user">
+                     Tambah Kategori
+                  </button>
+               </a>
             </div>
 
             <div id="staff-content" class="menu-content ">

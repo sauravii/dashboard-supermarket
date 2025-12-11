@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $role_name = $_POST['role_name'];
 
     update_role_controller($role_id, $role_name);
-    header("Location: dashboard_role.php");
+    header("Location: dashboard.php");
     exit;
 }
 ?>
